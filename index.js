@@ -12,6 +12,7 @@ app.get("/productboard-webhook", async (req, res) => {
 
 // POST route to handle Productboard webhook updates
 app.post("/productboard-webhook", async (req, res) => {
+	console.log("Req.body is:", req.body);
 	// Grabbing feature ID from the webhook POST
 	const productboardFeatureID = req.body.data.id;
 	// 🛑 Add your Jira integration ID below. You can access the ID by going to your Jira integration settings and copying the string in the final slash

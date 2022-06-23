@@ -1,8 +1,14 @@
 const express = require("express");
 const bodyParser = require("body-parser"); // Parses JSON bodies
+const cookieParser = require("cookie-parser");
 const app = express().use(bodyParser.text());
 const port = process.env.PORT || 3000;
 const axios = require("axios"); // Helps by sending HTTP for us
+
+// Config of server
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 // GET route to authenticate the Productboard webhook
 app.get("/productboard-webhook", async (req, res) => {

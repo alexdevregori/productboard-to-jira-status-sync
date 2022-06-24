@@ -111,6 +111,7 @@ app.post("/productboard-webhook", async (req, res) => {
 
 						data: transitionData,
 					};
+					console.log(jiraConfig);
 
 					// Send request to Jira to update status
 					axios(jiraConfig)

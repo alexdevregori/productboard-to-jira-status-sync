@@ -96,7 +96,6 @@ app.post("/productboard-webhook", async (req, res) => {
 					const pbFeatureJiraId = response.data.data.connection.issueId;
 					const transitionData = JSON.stringify(jiraPBStatusMap);
 
-					console.log(jiraAuth);
 					const jiraConfig = {
 						method: "post",
 						url: `${jiraCloudURL}/rest/api/3/issue/${pbFeatureJiraId}/transitions`,

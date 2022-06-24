@@ -18,7 +18,6 @@ app.get("/productboard-webhook", async (req, res) => {
 
 // POST route to handle Productboard webhook updates
 app.post("/productboard-webhook", async (req, res) => {
-	console.log("Req.body is:", req.body);
 	// Grabbing feature ID from the webhook POST
 	const productboardFeatureID = req.body.data.id;
 	// 🛑 Add your Jira integration ID below. You can access the ID by going to your Jira integration settings and copying the string in the final slash
@@ -83,7 +82,6 @@ app.post("/productboard-webhook", async (req, res) => {
 				jiraPBStatusMap = null;
 			}
 
-			console.log("Assigned PB status is", pbFeatureStatus);
 			console.log("Transition ID is", jiraPBStatusMap);
 
 			// Request to find Jira issue ID the PB feature is connected to
@@ -101,8 +99,7 @@ app.post("/productboard-webhook", async (req, res) => {
 						method: "post",
 						url: `${jiraCloudURL}/rest/api/3/issue/${pbFeatureJiraId}/transitions`,
 						headers: {
-							Authorization:
-								"Basic YWxleC5kZWdyZWdvcmlAcHJvZHVjdGJvYXJkLmNvbTpnN09OY3Y5YllPNkFmeUs1SWUzQ0EzRjQ=",
+							Authorization: "Basic xBqVMXkTqOrKV2IBQ8xr2B59",
 							"Content-Type": "application/json",
 						},
 						data: transitionData,
@@ -112,10 +109,10 @@ app.post("/productboard-webhook", async (req, res) => {
 					axios(jiraConfig)
 						.then(function (response) {
 							// Confirm status update went through with response code 204
-							console.log("Jira response code is:", response.status);
+							console.log("Response from Jira:", response.status);
 						})
 						.catch(function (error) {
-							console.log(error);
+							console.log(error.code);
 						});
 				})
 				.catch(function (error) {

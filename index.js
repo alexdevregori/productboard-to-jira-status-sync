@@ -95,12 +95,15 @@ app.post("/productboard-webhook", async (req, res) => {
 					// Get Jira integration ID, Transition ID, and configure the request to update Jira status
 					const pbFeatureJiraId = response.data.data.connection.issueId;
 					const transitionData = JSON.stringify(jiraPBStatusMap);
+					const jiraAuth = Buffer.from(
+						"alex.degregori@productboard.com:8GPpc1h0NVBShn8UwDWsEA41"
+					).toString("base64");
+					console.log(jiraAuth);
 					const jiraConfig = {
 						method: "post",
 						url: `${jiraCloudURL}/rest/api/3/issue/${pbFeatureJiraId}/transitions`,
 						headers: {
-							Authorization:
-								"Bearer alex.degregori@productboard.com:xBqVMXkTqOrKV2IBQ8xr2B59",
+							Authorization: `Basic ${jiraAuth}`,
 							"Content-Type": "application/json",
 						},
 						data: transitionData,

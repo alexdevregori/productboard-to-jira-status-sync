@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// GET route to authenticate the Productboard webhook
+// GET route to authenticate the Productboard webhook for feature updates
 app.get("/productboard-webhook", async (req, res) => {
 	res.setHeader("Content-type", "text/plain");
 	res.status(200).send(res.req.query.validationToken);

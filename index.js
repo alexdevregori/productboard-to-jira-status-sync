@@ -96,7 +96,7 @@ app.post("/productboard-webhook", async (req, res) => {
 					const pbFeatureJiraId = response.data.data.connection.issueId;
 					const transitionData = JSON.stringify(jiraPBStatusMap);
 					const jiraAuth = Buffer.from(
-						"alex.degregori@productboard.com:wUaOx9QeNLjX6RMlGnMw0564"
+						"alex.degregori@productboard.com:zrTHKZ5pXoFrSuymhxpWD7BC"
 					).toString("base64");
 					console.log(jiraAuth);
 					const jiraConfig = {

@@ -98,11 +98,11 @@ app.post("/productboard-webhook", async (req, res) => {
 					const jiraConfig = {
 						method: "post",
 						url: `${jiraCloudURL}/rest/api/3/issue/${pbFeatureJiraId}/transitions`,
+						auth: {
+							username: "alex.degregori@productboard.com",
+							password: "xBqVMXkTqOrKV2IBQ8xr2B59",
+						},
 						headers: {
-							Authorization: {
-								username: "alex.degregori@productboard.com",
-								password: "xBqVMXkTqOrKV2IBQ8xr2B59",
-							},
 							"Content-Type": "application/json",
 						},
 						data: transitionData,

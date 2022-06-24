@@ -115,7 +115,7 @@ app.post("/productboard-webhook", async (req, res) => {
 							console.log("Response from Jira:", response.status);
 						})
 						.catch(function (error) {
-							console.log(error.code);
+							console.log(error);
 						});
 				})
 				.catch(function (error) {

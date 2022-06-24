@@ -103,8 +103,10 @@ app.post("/productboard-webhook", async (req, res) => {
 						method: "post",
 						url: `${jiraCloudURL}/rest/api/3/issue/${pbFeatureJiraId}/transitions`,
 						headers: {
-							Authorization: `Basic ${jiraAuth}`,
+							Authorization: `Basic YWxleC5kZWdyZWdvcmlAcHJvZHVjdGJvYXJkLmNvbTp3VWFPeDlRZU5Malg2Uk1sR25NdzA1NjQ=`,
 							"Content-Type": "application/json",
+							Cookie:
+								"atlassian.xsrf.token=7f6f5a2e-5693-4d95-98b9-1f1c05ef1a5a_cc35e30b9c955b587bbc1e81cf1aae92a05b5b37_lin",
 						},
 
 						data: transitionData,

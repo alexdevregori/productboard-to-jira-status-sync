@@ -20,14 +20,18 @@ app.get("/productboard-webhook", async (req, res) => {
 app.post("/productboard-webhook", async (req, res) => {
 	// Grabbing feature ID from the webhook POST
 	const productboardFeatureID = req.body.data.id;
-	// 🛑 Add your Jira integration ID below. You can access the ID by going to your Jira integration settings and copying the string in the final slash
-	const jiraIntegrationId = "feac0a2e-8600-4fac-876d-964c5f15f911";
+	// 🛑 Add your Jira integration ID below. You can access the ID by going to your Jira integration settings in Productboard and copying the string in the final slash
+	const jiraIntegrationId = "JIRA INTEGRATION ID HERE";
 	// 🛑 Add your PB API token below. More info on creating an API token here: https://developer.productboard.com/#section/Authentication/Getting-a-token
-	const pbAPITokenID =
-		"eyJ0eXAiOiJKV1QiLCJraWQiOiJlY2IzMmI3MjdiNGY5NWFiOTkzNWNlMjhjYWViZGQ0MGRhYzIzMDk2YTJhZjliMDU1ZmJkZGEwOGM0ZmZiMzNmIiwiYWxnIjoiUlM1MTIifQ.eyJpc3MiOiJjNjU2YjMyNC04NmRjLTQ0ZWQtOWViNy1mMGYwMDEzMDhlMGEiLCJzdWIiOiI5NzEwMyIsInJvbGUiOiJhZG1pbiIsImF1ZCI6Imh0dHBzOi8vYXBpLnByb2R1Y3Rib2FyZC5jb20iLCJ1c2VyX2lkIjo5NzEwMywic3BhY2VfaWQiOiI1Nzc4MSIsImlhdCI6MTYzODIwNTEzN30.H4K0MNtRUeNLyClaEuHMp1UY8lUTgrR8QBfaVD8uyuEAtk9U-y9uuWb0m0CpJuLUm9bc3fSanFc8_-by9OgT2WERJT0UjgmH2RbXxN-te8tptsw2kdgbUqFNIMP2wqpXkIvwamdIwxtJP3Tj07BV0NpuoSGBLoppSNelg2yOWgOM9vtnrjHZx1V94lAJde9-bXo092wFaRMk8QcdTu-AyY-4Ao_x4h6p5d1Yzf1_L7qb7Royk7YhpAKySUK0B2noShlFzLu9roPnYwO8GT7EEFE5OtKco4sURYDXDULZbtyJE1Ztr_dY6W4PI9D2kssDo6cIYVK_AsoT51CWzvhKWw";
-	const jiraCloudURL = "https://excellence-alex.atlassian.net";
-	const jiraAuth =
-		"YWxleC5kZWdyZWdvcmlAcHJvZHVjdGJvYXJkLmNvbToxRExMZDdQMGozYkJvMnlvQ0NqcDA1MUM=";
+	const pbAPITokenID = "ENTER TOKEN HERE";
+	// 🛑 Enter the base URL of your Jira instance
+	const jiraCloudURL = "https://your-url-here.atlassian.net";
+	// 🛑 Enter your Jira Basic authentication below. (You will want this token hidden in something like a .env file)
+	// In order to create your Jira Auth token you need to encode the following string into Base64
+	// The string will have your email | colon | Jira API Key. Example:  "youremail@company.com:YOURJIREAPIKEY"
+	// To obtain your Jira API key go to this link: https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/
+	// Once you have the key enter the string into https://www.base64encode.org/ and click > ENCODE < ... You will habe to copy/paste the string provided to you as that is your Jira Auth Token
+	const jiraAuth = "BASE64 AUTH TOKEN HERE";
 	let jiraPBStatusMap;
 
 	// Configuration for GET request to grab feature status
@@ -105,7 +109,6 @@ app.post("/productboard-webhook", async (req, res) => {
 							Authorization: `Basic ${jiraAuth}`,
 							"Content-Type": "application/json",
 						},
-
 						data: transitionData,
 					};
 					console.log(jiraConfig);

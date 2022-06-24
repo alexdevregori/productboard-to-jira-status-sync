@@ -96,7 +96,7 @@ app.post("/productboard-webhook", async (req, res) => {
 					const pbFeatureJiraId = response.data.data.connection.issueId;
 					const transitionData = JSON.stringify(jiraPBStatusMap);
 					const jiraAuth = Buffer.from(
-						"alex.degregori@productboard.com:8GPpc1h0NVBShn8UwDWsEA41"
+						"alex.degregori@productboard.com:wUaOx9QeNLjX6RMlGnMw0564"
 					).toString("base64");
 					console.log(jiraAuth);
 					const jiraConfig = {
@@ -105,8 +105,6 @@ app.post("/productboard-webhook", async (req, res) => {
 						headers: {
 							Authorization: `Basic ${jiraAuth}`,
 							"Content-Type": "application/json",
-							Cookie:
-								"atlassian.xsrf.token=7f6f5a2e-5693-4d95-98b9-1f1c05ef1a5a_cc29dcb81aba5da275e0de28f5f92970b898089a_lin",
 						},
 
 						data: transitionData,

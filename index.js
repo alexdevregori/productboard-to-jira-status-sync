@@ -99,7 +99,7 @@ app.post("/productboard-webhook", async (req, res) => {
 						method: "post",
 						url: `${jiraCloudURL}/rest/api/3/issue/${pbFeatureJiraId}/transitions`,
 						headers: {
-							Authorization: "Basic xBqVMXkTqOrKV2IBQ8xr2B59",
+							Authorization: "Bearer xBqVMXkTqOrKV2IBQ8xr2B59",
 							"Content-Type": "application/json",
 						},
 						data: transitionData,

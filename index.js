@@ -26,6 +26,8 @@ app.post("/productboard-webhook", async (req, res) => {
 	const pbAPITokenID =
 		"eyJ0eXAiOiJKV1QiLCJraWQiOiJlY2IzMmI3MjdiNGY5NWFiOTkzNWNlMjhjYWViZGQ0MGRhYzIzMDk2YTJhZjliMDU1ZmJkZGEwOGM0ZmZiMzNmIiwiYWxnIjoiUlM1MTIifQ.eyJpc3MiOiJjNjU2YjMyNC04NmRjLTQ0ZWQtOWViNy1mMGYwMDEzMDhlMGEiLCJzdWIiOiI5NzEwMyIsInJvbGUiOiJhZG1pbiIsImF1ZCI6Imh0dHBzOi8vYXBpLnByb2R1Y3Rib2FyZC5jb20iLCJ1c2VyX2lkIjo5NzEwMywic3BhY2VfaWQiOiI1Nzc4MSIsImlhdCI6MTYzODIwNTEzN30.H4K0MNtRUeNLyClaEuHMp1UY8lUTgrR8QBfaVD8uyuEAtk9U-y9uuWb0m0CpJuLUm9bc3fSanFc8_-by9OgT2WERJT0UjgmH2RbXxN-te8tptsw2kdgbUqFNIMP2wqpXkIvwamdIwxtJP3Tj07BV0NpuoSGBLoppSNelg2yOWgOM9vtnrjHZx1V94lAJde9-bXo092wFaRMk8QcdTu-AyY-4Ao_x4h6p5d1Yzf1_L7qb7Royk7YhpAKySUK0B2noShlFzLu9roPnYwO8GT7EEFE5OtKco4sURYDXDULZbtyJE1Ztr_dY6W4PI9D2kssDo6cIYVK_AsoT51CWzvhKWw";
 	const jiraCloudURL = "https://excellence-alex.atlassian.net";
+	const jiraAuth =
+		"YWxleC5kZWdyZWdvcmlAcHJvZHVjdGJvYXJkLmNvbToxRExMZDdQMGozYkJvMnlvQ0NqcDA1MUM=";
 	let jiraPBStatusMap;
 
 	// Configuration for GET request to grab feature status
@@ -100,10 +102,8 @@ app.post("/productboard-webhook", async (req, res) => {
 						method: "post",
 						url: `${jiraCloudURL}/rest/api/3/issue/${pbFeatureJiraId}/transitions`,
 						headers: {
-							Authorization: `Basic YWxleC5kZWdyZWdvcmlAcHJvZHVjdGJvYXJkLmNvbToxRExMZDdQMGozYkJvMnlvQ0NqcDA1MUM=`,
+							Authorization: `Basic ${jiraAuth}`,
 							"Content-Type": "application/json",
-							Cookie:
-								"atlassian.xsrf.token=7f6f5a2e-5693-4d95-98b9-1f1c05ef1a5a_cc35e30b9c955b587bbc1e81cf1aae92a05b5b37_lin",
 						},
 
 						data: transitionData,

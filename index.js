@@ -26,6 +26,7 @@ app.post("/productboard-webhook", async (req, res) => {
 	// 🛑 Add your PB API token below. More info on creating an API token here: https://developer.productboard.com/#section/Authentication/Getting-a-token
 	const pbAPITokenID =
 		"eyJ0eXAiOiJKV1QiLCJraWQiOiJlY2IzMmI3MjdiNGY5NWFiOTkzNWNlMjhjYWViZGQ0MGRhYzIzMDk2YTJhZjliMDU1ZmJkZGEwOGM0ZmZiMzNmIiwiYWxnIjoiUlM1MTIifQ.eyJpc3MiOiJjNjU2YjMyNC04NmRjLTQ0ZWQtOWViNy1mMGYwMDEzMDhlMGEiLCJzdWIiOiI5NzEwMyIsInJvbGUiOiJhZG1pbiIsImF1ZCI6Imh0dHBzOi8vYXBpLnByb2R1Y3Rib2FyZC5jb20iLCJ1c2VyX2lkIjo5NzEwMywic3BhY2VfaWQiOiI1Nzc4MSIsImlhdCI6MTYzODIwNTEzN30.H4K0MNtRUeNLyClaEuHMp1UY8lUTgrR8QBfaVD8uyuEAtk9U-y9uuWb0m0CpJuLUm9bc3fSanFc8_-by9OgT2WERJT0UjgmH2RbXxN-te8tptsw2kdgbUqFNIMP2wqpXkIvwamdIwxtJP3Tj07BV0NpuoSGBLoppSNelg2yOWgOM9vtnrjHZx1V94lAJde9-bXo092wFaRMk8QcdTu-AyY-4Ao_x4h6p5d1Yzf1_L7qb7Royk7YhpAKySUK0B2noShlFzLu9roPnYwO8GT7EEFE5OtKco4sURYDXDULZbtyJE1Ztr_dY6W4PI9D2kssDo6cIYVK_AsoT51CWzvhKWw";
+	const jiraCloudURL = "https://excellence-alex.atlassian.net";
 	let jiraPBStatusMap;
 
 	// Configuration for GET request to grab feature status
@@ -54,9 +55,10 @@ app.post("/productboard-webhook", async (req, res) => {
 			console.log("Feature status is", response.data.data.status.name);
 			const pbFeatureStatus = response.data.data.status.name;
 
-			// 🛑 Add PB <> Jira Status mappings below. The variable pbFeatureStatus is the status name of the feature and the jiraPBStatusMap variable represents the Jira status.
+			// 🛑 Add PB <> Jira Status mappings below through the IF Statement block of code.
+			// The variable pbFeatureStatus is the status name of the feature in Productboard and the jiraPBStatusMap variable represents the Jira status.
 			// Note that a transistion ID is provided to you for each Jira Status. In order to update a Jira issue's status via the API, you must send the Transistion ID in the body of your request.
-			// To easily find your Transition IDs, make a GET request to one of your issues i.e. https://<Enter Jira URL>.atlassian.net/rest/api/3/issue/<Enter Jira ID here>/transitions
+			// To easily find your Transition IDs, make a GET request via the your webbrowser by entering in the following URL: https://<Enter Jira URL>.atlassian.net/rest/api/3/issue/<Enter Jira ID here>/transitions
 			// The response will show you what the Transition IDs are for each Jira status
 
 			if (pbFeatureStatus == "Candidate") {
@@ -97,13 +99,11 @@ app.post("/productboard-webhook", async (req, res) => {
 					const transitionData = JSON.stringify(jiraPBStatusMap);
 					const jiraConfig = {
 						method: "post",
-						url: `https://excellence-alex.atlassian.net/rest/api/3/issue/${pbFeatureJiraId}/transitions`,
+						url: `${jiraCloudURL}/rest/api/3/issue/${pbFeatureJiraId}/transitions`,
 						headers: {
 							Authorization:
 								"Basic YWxleC5kZWdyZWdvcmlAcHJvZHVjdGJvYXJkLmNvbTpnN09OY3Y5YllPNkFmeUs1SWUzQ0EzRjQ=",
 							"Content-Type": "application/json",
-							Cookie:
-								"atlassian.xsrf.token=7f6f5a2e-5693-4d95-98b9-1f1c05ef1a5a_72445b831692bfd97ef1fb4b0a1b350a558f46c4_lin",
 						},
 						data: transitionData,
 					};
